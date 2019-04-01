@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.UI;
 using org.gnu.glpk;
 namespace OtimizaçãoSimplex.Controllers
 {
-    public class GlpkController
+    public class GlpkController: Controller
     {
 
         public static void versao()
@@ -21,7 +22,8 @@ namespace OtimizaçãoSimplex.Controllers
         /// <param name="y">Crianças</param>
         /// <param name="restricoes">Valores maximos em função de cada restrição</param>
         /// <returns></returns>
-        public static string SimplexFO(double x, double y, List<double> restricoes)
+        [Route]
+        public string SimplexFO(/*double x, double y, List<double> restricoes*/)
         {
             //Variáveis locais para utilização do GLPK
             glp_prob problema;
@@ -82,7 +84,6 @@ namespace OtimizaçãoSimplex.Controllers
 
                     retorno += name + " = " + val2 + "\n";
                 }
-
 
             }
             catch (GlpkException ex)
