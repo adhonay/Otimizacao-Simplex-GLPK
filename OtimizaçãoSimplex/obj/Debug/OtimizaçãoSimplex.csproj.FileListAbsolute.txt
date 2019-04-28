@@ -106,7 +106,6 @@ C:\Users\Adhonay Júnior\Desktop\Trab Oti\Otimizacao-Simplex-GLPK\OtimizaçãoSi
 C:\Users\Adhonay Júnior\Desktop\Trab Oti\Otimizacao-Simplex-GLPK\OtimizaçãoSimplex\obj\Debug\OtimizaçãoSimplex.csproj.CoreCompileInputs.cache
 C:\Users\Adhonay Júnior\Desktop\Trab Oti\Otimizacao-Simplex-GLPK\OtimizaçãoSimplex\obj\Debug\OtimizaçãoSimplex.dll
 C:\Users\Adhonay Júnior\Desktop\Trab Oti\Otimizacao-Simplex-GLPK\OtimizaçãoSimplex\obj\Debug\OtimizaçãoSimplex.pdb
-D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\obj\Debug\OtimizaçãoSimplex.csproj.CoreCompileInputs.cache
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\ApplicationInsights.config
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\OtimizaçãoSimplex.dll.config
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\OtimizaçãoSimplex.dll
@@ -175,7 +174,6 @@ D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Microsof
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Microsoft.Practices.Unity.Interception.dll
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Microsoft.Web.Infrastructure.dll
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Newtonsoft.Json.dll
-D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Optimization.Framework.dll
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.Diagnostics.DiagnosticSource.dll
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.Web.Helpers.dll
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.Web.Mvc.dll
@@ -189,7 +187,7 @@ D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Microsof
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Microsoft.Practices.Unity.Configuration.xml
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Microsoft.Practices.Unity.Interception.xml
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Microsoft.Practices.Unity.Interception.Configuration.xml
-D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Optimization.Framework.xml
+D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Newtonsoft.Json.xml
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.Web.Helpers.xml
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.Web.Mvc.xml
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.Web.Optimization.xml
@@ -197,7 +195,6 @@ D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.W
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.Web.WebPages.xml
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.Web.WebPages.Deployment.xml
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.Web.WebPages.Razor.xml
-D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Newtonsoft.Json.xml
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Antlr3.Runtime.pdb
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\System.Diagnostics.DiagnosticSource.xml
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\Microsoft.AspNet.TelemetryCorrelation.xml
@@ -212,6 +209,7 @@ D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\pt-br\Sy
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\pt-br\System.Web.WebPages.resources.dll
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\bin\pt-br\System.Web.WebPages.Razor.resources.dll
+D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\obj\Debug\OtimizaçãoSimplex.csproj.CoreCompileInputs.cache
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\obj\Debug\OtimizaçãoSimplex.csproj.CopyComplete
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\obj\Debug\OtimizaçãoSimplex.dll
 D:\Users\I$ync\source\repos\OtimizaçãoSimplex\OtimizaçãoSimplex\obj\Debug\OtimizaçãoSimplex.pdb

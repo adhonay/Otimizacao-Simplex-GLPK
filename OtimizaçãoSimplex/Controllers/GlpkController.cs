@@ -5,15 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using org.gnu.glpk;
+using OtimizaçãoSimplex.Models;
+
 namespace OtimizaçãoSimplex.Controllers
 {
     public class GlpkController : Controller
     {
-
-        public static void versao()
-        {
-            var teste = GLPK.glp_version();
-        }
 
         /// <summary>
         /// Calcular FO, maximizar valor de Z
@@ -22,15 +19,16 @@ namespace OtimizaçãoSimplex.Controllers
         /// <param name="y">Crianças</param>
         /// <param name="restricoes">Valores maximos em função de cada restrição</param>
         /// <returns></returns>
-        [Route]
-        public string SimplexFO(/*double x, double y, List<double> restricoes*/)
+        [HttpPost]
+        public JsonResult SimplexFO(Modelo modelo)
         {
+
+
             glp_prob problema;
             glp_smcp parametro;
             SWIGTYPE_p_int indices;
             SWIGTYPE_p_double valores;
-            int ret;
-
+            Resposta retorno = new Resposta();
             try
             {
 
@@ -40,25 +38,17 @@ namespace OtimizaçãoSimplex.Controllers
                 GLPK.glp_set_obj_name(problema, "FO(Z)");
 
                 // Define columns
-                GLPK.glp_add_cols(problema, 5);
+                GLPK.glp_add_cols(problema, 2);
                 //Atribui o nome da variável a coluna do problema
                 GLPK.glp_set_col_name(problema, 1, "A");
                 //Atribui o tipo da variável (Double ou int) IV = INT , CV = DOUBLE
                 GLPK.glp_set_col_kind(problema, 1, GLPK.GLP_CV);
                 //Define que todas as variáveis têm de ser maiores ou iguais a 0
-                GLPK.glp_set_col_bnds(problema, 1, GLPK.GLP_LO, 0, 0);
+                GLPK.glp_set_col_bnds(problema, 1, GLPK.GLP_DB, 0, modelo.NumAdulto);
                 GLPK.glp_set_col_name(problema, 2, "C");
                 GLPK.glp_set_col_kind(problema, 2, GLPK.GLP_CV);
-                GLPK.glp_set_col_bnds(problema, 2, GLPK.GLP_LO, 0, 0);
-                GLPK.glp_set_col_name(problema, 3, "K1");
-                GLPK.glp_set_col_kind(problema, 3, GLPK.GLP_CV);
-                GLPK.glp_set_col_bnds(problema, 3, GLPK.GLP_LO, 0, 0);
-                GLPK.glp_set_col_name(problema, 4, "K2");
-                GLPK.glp_set_col_kind(problema, 4, GLPK.GLP_CV);
-                GLPK.glp_set_col_bnds(problema, 4, GLPK.GLP_LO, 0, 0);
-                GLPK.glp_set_col_name(problema, 5, "K3");
-                GLPK.glp_set_col_kind(problema, 5, GLPK.GLP_CV);
-                GLPK.glp_set_col_bnds(problema, 5, GLPK.GLP_LO, 0, 0);
+                GLPK.glp_set_col_bnds(problema, 2, GLPK.GLP_DB, 0, modelo.NumCrianca);
+
 
                 // Criar constantes
 
@@ -71,138 +61,92 @@ namespace OtimizaçãoSimplex.Controllers
 
                 //Adiciona o número de linhas(restrições) ao problema
 
-                GLPK.glp_add_rows(problema, 9);
+                GLPK.glp_add_rows(problema, 8);
 
                 //Atribui o nome da linha no problema ao "nome" da restrição
                 GLPK.glp_set_row_name(problema, 1, "R1");
                 //Atribui os limites a aquela restrição dentro do problema
-                GLPK.glp_set_row_bnds(problema, 1, GLPK.GLP_DB, 0, 120);//------Arroz 
+                GLPK.glp_set_row_bnds(problema, 1, GLPK.GLP_UP, modelo.QuantidadeArroz, modelo.QuantidadeArroz);//------Arroz 
                 //Atribui o indice ao item (variavel) correto
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.intArray_setitem(indices, 3, 3);
-                GLPK.intArray_setitem(indices, 4, 4);
-                GLPK.intArray_setitem(indices, 5, 5);
                 //Atribui o coeficiente ao item (variavel) correto
                 GLPK.doubleArray_setitem(valores, 1, 3.0);
                 GLPK.doubleArray_setitem(valores, 2, 2.0);
-                GLPK.doubleArray_setitem(valores, 3, 5.0);
-                GLPK.doubleArray_setitem(valores, 4, 7.0);
-                GLPK.doubleArray_setitem(valores, 5, 8.0);
                 //Atribui a restrição para o problema em seu lugar correto na matriz
-                GLPK.glp_set_mat_row(problema, 1, 5, indices, valores);
+                GLPK.glp_set_mat_row(problema, 1, 2, indices, valores);
 
-                GLPK.glp_set_row_name(problema, 1, "R2");
-                GLPK.glp_set_row_bnds(problema, 1, GLPK.GLP_DB, 0, 10);//------Sal
+                GLPK.glp_set_row_name(problema, 2, "R2");
+                GLPK.glp_set_row_bnds(problema, 2, GLPK.GLP_UP, modelo.QuantidadeSal, modelo.QuantidadeSal);//------Sal
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.intArray_setitem(indices, 3, 3);
-                GLPK.intArray_setitem(indices, 4, 4);
-                GLPK.intArray_setitem(indices, 5, 5);
-                GLPK.doubleArray_setitem(valores, 1, 1.0);
-                GLPK.doubleArray_setitem(valores, 2, 1.0);
-                GLPK.doubleArray_setitem(valores, 3, 1.0);
-                GLPK.doubleArray_setitem(valores, 4, 1.0);
-                GLPK.doubleArray_setitem(valores, 5, 1.0);
-                GLPK.glp_set_mat_row(problema, 2, 5, indices, valores);
+                GLPK.doubleArray_setitem(valores, 1, 0.3);
+                GLPK.doubleArray_setitem(valores, 2, 0.1);
+                GLPK.glp_set_mat_row(problema, 2, 2, indices, valores);
 
-                GLPK.glp_set_row_name(problema, 1, "R3");
-                GLPK.glp_set_row_bnds(problema, 1, GLPK.GLP_DB, 0, 80);//------Feijão
+
+                GLPK.glp_set_row_name(problema, 3, "R3");
+                GLPK.glp_set_row_bnds(problema, 3, GLPK.GLP_UP, modelo.QuantidadeFeijao, modelo.QuantidadeFeijao);//------Feijão
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.intArray_setitem(indices, 3, 3);
-                GLPK.intArray_setitem(indices, 4, 4);
-                GLPK.intArray_setitem(indices, 5, 5);
                 GLPK.doubleArray_setitem(valores, 1, 5.0);
                 GLPK.doubleArray_setitem(valores, 2, 3.0);
-                GLPK.doubleArray_setitem(valores, 3, 6.0);
-                GLPK.doubleArray_setitem(valores, 4, 10.0);
-                GLPK.doubleArray_setitem(valores, 5, 12.0);
-                GLPK.glp_set_mat_row(problema, 3, 5, indices, valores);
+                GLPK.glp_set_mat_row(problema, 3, 2, indices, valores);
 
-                GLPK.glp_set_row_name(problema, 1, "R4");
-                GLPK.glp_set_row_bnds(problema, 1, GLPK.GLP_DB, 0, 110);//------Açúcar
+                GLPK.glp_set_row_name(problema, 4, "R4");
+                GLPK.glp_set_row_bnds(problema, 4, GLPK.GLP_UP, modelo.QuantidadeAcucar, modelo.QuantidadeAcucar);//------Açúcar
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.intArray_setitem(indices, 3, 3);
-                GLPK.intArray_setitem(indices, 4, 4);
-                GLPK.intArray_setitem(indices, 5, 5);
                 GLPK.doubleArray_setitem(valores, 1, 3.0);
                 GLPK.doubleArray_setitem(valores, 2, 2.0);
-                GLPK.doubleArray_setitem(valores, 3, 4.0);
-                GLPK.doubleArray_setitem(valores, 4, 7.0);
-                GLPK.doubleArray_setitem(valores, 5, 8.0);
-                GLPK.glp_set_mat_row(problema, 4, 5, indices, valores);
+                GLPK.glp_set_mat_row(problema, 4, 2, indices, valores);
 
-                GLPK.glp_set_row_name(problema, 1, "R5");
-                GLPK.glp_set_row_bnds(problema, 1, GLPK.GLP_DB, 0, 45);//------Farinha
+                GLPK.glp_set_row_name(problema, 5, "R5");
+                GLPK.glp_set_row_bnds(problema, 5, GLPK.GLP_UP, modelo.QuantidadeFarinha, modelo.QuantidadeFarinha);//------Farinha
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.intArray_setitem(indices, 3, 3);
-                GLPK.intArray_setitem(indices, 4, 4);
-                GLPK.intArray_setitem(indices, 5, 5);
                 GLPK.doubleArray_setitem(valores, 1, 1.0);
-                GLPK.doubleArray_setitem(valores, 2, 1.0);
-                GLPK.doubleArray_setitem(valores, 3, 2.0);
-                GLPK.doubleArray_setitem(valores, 4, 3.0);
-                GLPK.doubleArray_setitem(valores, 5, 4.0);
-                GLPK.glp_set_mat_row(problema, 5, 5, indices, valores);
+                GLPK.doubleArray_setitem(valores, 2, 0.3);
+                GLPK.glp_set_mat_row(problema, 5, 2, indices, valores);
 
-                GLPK.glp_set_row_name(problema, 1, "R6");
-                GLPK.glp_set_row_bnds(problema, 1, GLPK.GLP_DB, 0, 120);//------Leite
+                GLPK.glp_set_row_name(problema, 6, "R6");
+                GLPK.glp_set_row_bnds(problema, 6, GLPK.GLP_UP, modelo.QuantidadeLeite, modelo.QuantidadeLeite);//------Leite
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.intArray_setitem(indices, 3, 3);
-                GLPK.intArray_setitem(indices, 4, 4);
-                GLPK.intArray_setitem(indices, 5, 5);
                 GLPK.doubleArray_setitem(valores, 1, 8.0);
-                GLPK.doubleArray_setitem(valores, 2, 10.0);
-                GLPK.doubleArray_setitem(valores, 3, 16.0);
-                GLPK.doubleArray_setitem(valores, 4, 21.0);
-                GLPK.doubleArray_setitem(valores, 5, 29.0);
-                GLPK.glp_set_mat_row(problema, 6, 5, indices, valores);
+                GLPK.doubleArray_setitem(valores, 2, 15.0);
+                GLPK.glp_set_mat_row(problema, 6, 2, indices, valores);
 
-                GLPK.glp_set_row_name(problema, 1, "R7");
-                GLPK.glp_set_row_bnds(problema, 1, GLPK.GLP_DB, 0, 70);//------Carne
+                GLPK.glp_set_row_name(problema, 7, "R7");
+                GLPK.glp_set_row_bnds(problema, 7, GLPK.GLP_UP, modelo.QuantidadeCarne, modelo.QuantidadeCarne);//------Carne
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.intArray_setitem(indices, 3, 3);
-                GLPK.intArray_setitem(indices, 4, 4);
-                GLPK.intArray_setitem(indices, 5, 5);
                 GLPK.doubleArray_setitem(valores, 1, 6.0);
                 GLPK.doubleArray_setitem(valores, 2, 4.0);
-                GLPK.doubleArray_setitem(valores, 3, 9.0);
-                GLPK.doubleArray_setitem(valores, 4, 13.5);
-                GLPK.doubleArray_setitem(valores, 5, 16.3);
-                GLPK.glp_set_mat_row(problema, 7, 5, indices, valores);
+                GLPK.glp_set_mat_row(problema, 7, 2, indices, valores);
 
-                GLPK.glp_set_row_name(problema, 1, "R8");
-                GLPK.glp_set_row_bnds(problema, 1, GLPK.GLP_DB, 0, 40);//------Óleo
+                GLPK.glp_set_row_name(problema, 8, "R8");
+                GLPK.glp_set_row_bnds(problema, 8, GLPK.GLP_UP, modelo.QuantidadeOleo, modelo.QuantidadeOleo);//------Óleo
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.intArray_setitem(indices, 3, 3);
-                GLPK.intArray_setitem(indices, 4, 4);
-                GLPK.intArray_setitem(indices, 5, 5);
-                GLPK.doubleArray_setitem(valores, 1, 0.9);
-                GLPK.doubleArray_setitem(valores, 2, 0.9);
-                GLPK.doubleArray_setitem(valores, 3, 0.9);
-                GLPK.doubleArray_setitem(valores, 4, 1.8);
-                GLPK.doubleArray_setitem(valores, 5, 1.8);
-                GLPK.glp_set_mat_row(problema, 8, 5, indices, valores);
-
-                GLPK.glp_set_row_name(problema, 1, "R9");
-                GLPK.glp_set_row_bnds(problema, 1, GLPK.GLP_DB, 0, 18);//------Café
-                GLPK.intArray_setitem(indices, 1, 1);
-                GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.intArray_setitem(indices, 3, 3);
-                GLPK.intArray_setitem(indices, 4, 4);
-                GLPK.intArray_setitem(indices, 5, 5);
-                GLPK.doubleArray_setitem(valores, 1, 0.5);
+                GLPK.doubleArray_setitem(valores, 1, 1.5);
                 GLPK.doubleArray_setitem(valores, 2, 0.5);
-                GLPK.doubleArray_setitem(valores, 3, 1.0);
-                GLPK.doubleArray_setitem(valores, 4, 2.0);
-                GLPK.doubleArray_setitem(valores, 5, 2.0);
-                GLPK.glp_set_mat_row(problema, 9, 5, indices, valores);
+                GLPK.glp_set_mat_row(problema, 8, 2, indices, valores);
+
+                //GLPK.glp_set_row_name(problema, 10, "R10");
+                //GLPK.glp_set_row_bnds(problema, 10, GLPK.GLP_UP, 0, 0);//CRIANÇA
+                //GLPK.intArray_setitem(indices, 1, 1);
+                //GLPK.intArray_setitem(indices, 2, 2);
+                //GLPK.doubleArray_setitem(valores, 1, 1);
+                //GLPK.doubleArray_setitem(valores, 2, -1);
+                //GLPK.glp_set_mat_row(problema, 10, 2, indices, valores);
+
+                //GLPK.glp_set_row_name(problema, 11, "R11");
+                //GLPK.glp_set_row_bnds(problema, 11, GLPK.GLP_UP, 4, 4);//CRIANÇA
+                //GLPK.intArray_setitem(indices, 2, 2);
+                //GLPK.doubleArray_setitem(valores, 2, 1);
+                //GLPK.glp_set_mat_row(problema, 11, 2, indices, valores);
+
 
                 // liberar memória
                 GLPK.delete_intArray(indices);
@@ -213,49 +157,58 @@ namespace OtimizaçãoSimplex.Controllers
                 GLPK.glp_set_obj_dir(problema, GLPK.GLP_MAX);
                 GLPK.glp_set_obj_coef(problema, 1, 1.0);
                 GLPK.glp_set_obj_coef(problema, 2, 1.0);
-                GLPK.glp_set_obj_coef(problema, 3, 1.0);
-                GLPK.glp_set_obj_coef(problema, 4, 1.0);
-                GLPK.glp_set_obj_coef(problema, 5, 1.0);
 
                 //Resolver o modelo
                 parametro = new glp_smcp();
                 GLPK.glp_init_smcp(parametro);
-                ret = GLPK.glp_simplex(problema, parametro);
+                int ret = GLPK.glp_simplex(problema, parametro);
 
                 //Restaurar solução
                 if (ret == 0)
                 {
-                    int i;
-                    int n;
+                    retorno.mensagem = "Solução Ótima encontrada!";
+                    retorno.status = true;
+
+                    string reto = "";
                     String name;
-                    double val;
-                    string index = "";
-                    name = GLPK.glp_get_obj_name(problema);
-                    val = GLPK.glp_get_obj_val(problema);
-                    Console.Write(name);
-                    Console.Write(" = ");
-                    Console.WriteLine(val);
-                    index = name.ToString() + " = " + val + "\n";
-                    n = GLPK.glp_get_num_cols(problema);
-                    for (i = 1; i <= n; i++)
+                    if (GLPK.glp_get_obj_val(problema).ToString().Length > 1 && GLPK.glp_get_obj_val(problema).ToString().Contains(','))
+                        retorno.valorTotal = GLPK.glp_get_obj_val(problema).ToString().Substring(0, GLPK.glp_get_obj_val(problema).ToString().IndexOf(","));
+                    else
+                        retorno.valorTotal = GLPK.glp_get_obj_val(problema).ToString();
+                    for (int i = 1; i <= GLPK.glp_get_num_cols(problema); i++)
                     {
                         name = GLPK.glp_get_col_name(problema, i);
-                        val = GLPK.glp_get_col_prim(problema, i);
-                        Console.Write(name);
-                        Console.Write(" = ");
-                        Console.WriteLine(val);
-                        index += name.ToString() + " = " + val +"\n";
+
+                        if (GLPK.glp_get_col_prim(problema, i).ToString().Length > 1 && GLPK.glp_get_col_prim(problema, i).ToString().Contains(','))
+                            reto = GLPK.glp_get_col_prim(problema, i).ToString().Substring(0, GLPK.glp_get_col_prim(problema, i).ToString().IndexOf(","));
+                        else
+                            reto = GLPK.glp_get_col_prim(problema, i).ToString();
+
+                        if (name == "A")
+                            retorno.valorAdulto = reto;
+                        else if (name == "C")
+                            retorno.valorCrianca = reto;
                     }
-                    return index;
+                    //Liberar memória
+                    GLPK.glp_delete_prob(problema);
+                    return  Json(new { retorno });
                 }
                 else
                 {
-                    return "Não pode ser resolvido";
-                } 
+                    //Liberar memória
+                    GLPK.glp_delete_prob(problema);
+                    retorno.mensagem = "Não é possível resolver o problema!";
+                    retorno.status = false;
+                    return Json(new { retorno });
+                }
+
+               
             }
             catch (GlpkException)
             {
-                return "exeção";
+                retorno.mensagem = "Exeção não esperada!";
+                retorno.status = false;
+                return Json(new { retorno });
 
             }
         }
