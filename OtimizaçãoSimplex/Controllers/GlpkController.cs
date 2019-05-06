@@ -24,6 +24,10 @@ namespace OtimizaçãoSimplex.Controllers
         {
 
 
+            var teste = GLPK.glp_version();
+
+
+
             glp_prob problema;
             glp_smcp parametro;
             SWIGTYPE_p_int indices;
@@ -179,8 +183,8 @@ namespace OtimizaçãoSimplex.Controllers
                     {
                         name = GLPK.glp_get_col_name(problema, i);
 
-                        if (GLPK.glp_get_col_prim(problema, i).ToString().Length > 1 && GLPK.glp_get_col_prim(problema, i).ToString().Contains(','))
-                            reto = GLPK.glp_get_col_prim(problema, i).ToString().Substring(0, GLPK.glp_get_col_prim(problema, i).ToString().IndexOf(","));
+                        if (GLPK.glp_get_col_prim(problema, i).ToString().Length > 1 && GLPK.glp_get_col_prim(problema, i).ToString().Contains('.'))
+                            reto = GLPK.glp_get_col_prim(problema, i).ToString().Substring(0, GLPK.glp_get_col_prim(problema, i).ToString().IndexOf("."));
                         else
                             reto = GLPK.glp_get_col_prim(problema, i).ToString();
 

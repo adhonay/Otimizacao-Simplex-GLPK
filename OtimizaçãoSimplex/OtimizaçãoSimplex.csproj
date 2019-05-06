@@ -46,8 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="libglpk-cli">
-      <HintPath>..\..\..\..\Documents\OTIMIZAÇÃO\GlpkWrapperCS-master\GlpkWrapperCS-master\GlpkWrapperCS\bin\Debug\libglpk-cli.dll</HintPath>
+    <Reference Include="libglpk-cli, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\libglpk-cli.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -188,10 +189,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <None Include="Properties\PublishProfiles\otimizando - Web Deploy.pubxml" />
+    <Content Include="glpk_4_65.dll" />
+    <Content Include="glpsol.exe" />
+    <Content Include="libglpk-cli.dll" />
+    <Content Include="libglpk_cli_native.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\indexSimplex.js" />
+    <None Include="Properties\PublishProfiles\otimizando - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

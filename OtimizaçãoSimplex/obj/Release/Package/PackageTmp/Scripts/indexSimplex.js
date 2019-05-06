@@ -22,7 +22,6 @@ $(document).ready(function () {
         } else {
 
             $("#erro").text("");
-            debugger;
 
             $.ajax({
                 type: "POST",
@@ -31,14 +30,11 @@ $(document).ready(function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    debugger;
                     if (result.retorno.status === true) {
                         $("#entradaAdulto").text(result.retorno.valorAdulto);
                         $("#entradaCrianca").text(result.retorno.valorCrianca);
                         $("#mensagemAdu").text(result.retorno.mensagem);
                         $("#mensagemCri").text(result.retorno.mensagem);
-
-
                     } else {
 
                         $("#entradaAdulto").text("Erro");
@@ -48,10 +44,8 @@ $(document).ready(function () {
                     }
                 },
                 error: function (result) {
-                    debugger;
-                    alert("Erro: " + result);
+                    alert("Processando... Clique em resolver novamente.");
                 }
-
             });
         }
     });
