@@ -31,16 +31,20 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (result) {
                     if (result.retorno.status === true) {
-                        $("#entradaAdulto").text(result.retorno.valorAdulto);
-                        $("#entradaCrianca").text(result.retorno.valorCrianca);
-                        $("#mensagemAdu").text(result.retorno.mensagem);
-                        $("#mensagemCri").text(result.retorno.mensagem);
+                        $("#entradaAdultoP").text(result.retorno.valorAdultoP);
+                        $("#entradaCriancaP").text(result.retorno.valorCriancaP);
+                        $("#entradaAdultoD").text(result.retorno.valorAdultoP);
+                        $("#entradaCriancaD").text(result.retorno.valorCriancaP);
+                        $("#mensagemPrimal").text(result.retorno.mensagem);
+                        $("#mensagemDual").text(result.retorno.mensagem);
                     } else {
 
-                        $("#entradaAdulto").text("Erro");
-                        $("#entradaCrianca").text("Erro");
-                        $("#mensagemAdu").text(result.retorno.mensagem);
-                        $("#mensagemCri").text(result.retorno.mensagem);
+                        $("#entradaAdultoP").text("Erro");
+                        $("#entradaCriancaP").text("Erro");
+                        $("#entradaAdultoD").text("Erro");
+                        $("#entradaCriancaD").text("Erro");
+                        $("#mensagemPrimal").text(result.retorno.mensagem);
+                        $("#mensagemDual").text(result.retorno.mensagem);
                     }
                 },
                 error: function (result) {

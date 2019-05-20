@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Otimização ";
 }
 
 <html>
@@ -137,28 +137,38 @@
             <div class="w3-row-padding" style="margin:0 -16px">
                 <div class="w3-half w3-margin-bottom">
                     <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
-                        <li class="w3-dark-grey w3-xlarge w3-padding-32">Adultos</li>
+                        <li class="w3-dark-grey w3-xlarge w3-padding-32">Primal</li>
                         <li class="w3-padding-16">N° de Adultos:</li>
                         <li class="w3-padding-16">
-                            <h2><text id="entradaAdulto" value="">0</text></h2>
+                            <h2><text id="entradaAdultoP" value="">0</text></h2>
+                            <span class="w3-opacity">atendidas</span>
+                        </li>
+                        <li class="w3-padding-16">N° de Crianças:</li>
+                        <li class="w3-padding-16">
+                            <h2><text id="entradaCriancaP" value="">0</text></h2>
                             <span class="w3-opacity">atendidas</span>
                         </li>
                         <li class="w3-light-grey w3-padding-24">
-                            <text id="mensagemAdu" value=""></text>
+                            <text id="mensagemPrimal" value=""></text>
                         </li>
                     </ul>
                 </div>
 
                 <div class="w3-half">
                     <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
-                        <li class="w3-dark-grey w3-xlarge w3-padding-32">Crianças</li>
+                        <li class="w3-dark-grey w3-xlarge w3-padding-32">Dual</li>
+                        <li class="w3-padding-16">N° de Adultos:</li>
+                        <li class="w3-padding-16">
+                            <h2><text id="entradaAdultoD" value="">0</text></h2>
+                            <span class="w3-opacity">atendidas</span>
+                        </li>
                         <li class="w3-padding-16">N° de Crianças:</li>
                         <li class="w3-padding-16">
-                            <h2><text id="entradaCrianca" value="">0</text></h2>
+                            <h2><text id="entradaCriancaD" value="">0</text></h2>
                             <span class="w3-opacity">atendidas</span>
                         </li>
                         <li class="w3-light-grey w3-padding-24">
-                            <text id="mensagemCri" value=""></text>
+                            <text id="mensagemDual" value=""></text>
                         </li>
                     </ul>
                 </div>

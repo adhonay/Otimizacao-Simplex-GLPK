@@ -5,6 +5,7 @@ using System.Web;
 
 namespace OtimizaçãoSimplex.Models
 {
+    //objeto modelo para receber como parametro pro glpk resolver.
     public class Modelo
     {
         public int NumAdulto { get; set; }
@@ -19,11 +20,14 @@ namespace OtimizaçãoSimplex.Models
         public double QuantidadeOleo { get; set; }
     }
 
+    //Objeto respsta para tratar resposta final para usuario.
     public class Resposta
     {
         public string mensagem { get; set; }
-        public string valorAdulto { get; set; }
-        public string valorCrianca { get; set; }
+        public string valorAdultoP { get; set; }
+        public string valorCriancaP { get; set; }
+        public string valorAdultoD { get; set; }
+        public string valorCriancaD { get; set; }
         public string valorTotal { get; set; }
         public bool status { get; set; }
     }

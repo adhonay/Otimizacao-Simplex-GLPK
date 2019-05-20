@@ -23,11 +23,11 @@ namespace OtimizaçãoSimplex.Controllers
         public JsonResult SimplexFO(Modelo modelo)
         {
 
+            //versão GLPK
+            var versao = GLPK.glp_version();
 
-            var teste = GLPK.glp_version();
 
-
-
+            //inicialização variaveis GLPK
             glp_prob problema;
             glp_smcp parametro;
             SWIGTYPE_p_int indices;
@@ -37,10 +37,13 @@ namespace OtimizaçãoSimplex.Controllers
             {
 
                 problema = GLPK.glp_create_prob();
+
+                GLPK.glp_set_prob_name(problema, "Otimização");
+
                 Console.WriteLine("Problem created");
                 //Atribui o nome da função objetiva no problema
                 GLPK.glp_set_obj_name(problema, "FO(Z)");
-
+               
                 // Define columns
                 GLPK.glp_add_cols(problema, 2);
                 //Atribui o nome da variável a coluna do problema
@@ -75,16 +78,19 @@ namespace OtimizaçãoSimplex.Controllers
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
                 //Atribui o coeficiente ao item (variavel) correto
-                GLPK.doubleArray_setitem(valores, 1, 3.0);
-                GLPK.doubleArray_setitem(valores, 2, 2.0);
+                GLPK.doubleArray_setitem(valores, 1, 2.0);
+                GLPK.doubleArray_setitem(valores, 2, 1.0);
                 //Atribui a restrição para o problema em seu lugar correto na matriz
                 GLPK.glp_set_mat_row(problema, 1, 2, indices, valores);
+
+                //demais linhas abaixos já foram comentadas acimas, apenas repedindo com novos valores para criação
+                //de novas restrições 
 
                 GLPK.glp_set_row_name(problema, 2, "R2");
                 GLPK.glp_set_row_bnds(problema, 2, GLPK.GLP_UP, modelo.QuantidadeSal, modelo.QuantidadeSal);//------Sal
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.doubleArray_setitem(valores, 1, 0.3);
+                GLPK.doubleArray_setitem(valores, 1, 0.5);
                 GLPK.doubleArray_setitem(valores, 2, 0.1);
                 GLPK.glp_set_mat_row(problema, 2, 2, indices, valores);
 
@@ -101,8 +107,8 @@ namespace OtimizaçãoSimplex.Controllers
                 GLPK.glp_set_row_bnds(problema, 4, GLPK.GLP_UP, modelo.QuantidadeAcucar, modelo.QuantidadeAcucar);//------Açúcar
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.doubleArray_setitem(valores, 1, 3.0);
-                GLPK.doubleArray_setitem(valores, 2, 2.0);
+                GLPK.doubleArray_setitem(valores, 1, 1.0);
+                GLPK.doubleArray_setitem(valores, 2, 0.5);
                 GLPK.glp_set_mat_row(problema, 4, 2, indices, valores);
 
                 GLPK.glp_set_row_name(problema, 5, "R5");
@@ -110,14 +116,14 @@ namespace OtimizaçãoSimplex.Controllers
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
                 GLPK.doubleArray_setitem(valores, 1, 1.0);
-                GLPK.doubleArray_setitem(valores, 2, 0.3);
+                GLPK.doubleArray_setitem(valores, 2, 0.5);
                 GLPK.glp_set_mat_row(problema, 5, 2, indices, valores);
 
                 GLPK.glp_set_row_name(problema, 6, "R6");
                 GLPK.glp_set_row_bnds(problema, 6, GLPK.GLP_UP, modelo.QuantidadeLeite, modelo.QuantidadeLeite);//------Leite
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.doubleArray_setitem(valores, 1, 8.0);
+                GLPK.doubleArray_setitem(valores, 1, 7.0);
                 GLPK.doubleArray_setitem(valores, 2, 15.0);
                 GLPK.glp_set_mat_row(problema, 6, 2, indices, valores);
 
@@ -125,32 +131,17 @@ namespace OtimizaçãoSimplex.Controllers
                 GLPK.glp_set_row_bnds(problema, 7, GLPK.GLP_UP, modelo.QuantidadeCarne, modelo.QuantidadeCarne);//------Carne
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.doubleArray_setitem(valores, 1, 6.0);
-                GLPK.doubleArray_setitem(valores, 2, 4.0);
+                GLPK.doubleArray_setitem(valores, 1, 7.0);
+                GLPK.doubleArray_setitem(valores, 2, 3.0);
                 GLPK.glp_set_mat_row(problema, 7, 2, indices, valores);
 
                 GLPK.glp_set_row_name(problema, 8, "R8");
                 GLPK.glp_set_row_bnds(problema, 8, GLPK.GLP_UP, modelo.QuantidadeOleo, modelo.QuantidadeOleo);//------Óleo
                 GLPK.intArray_setitem(indices, 1, 1);
                 GLPK.intArray_setitem(indices, 2, 2);
-                GLPK.doubleArray_setitem(valores, 1, 1.5);
-                GLPK.doubleArray_setitem(valores, 2, 0.5);
+                GLPK.doubleArray_setitem(valores, 1, 3.0);
+                GLPK.doubleArray_setitem(valores, 2, 1.0);
                 GLPK.glp_set_mat_row(problema, 8, 2, indices, valores);
-
-                //GLPK.glp_set_row_name(problema, 10, "R10");
-                //GLPK.glp_set_row_bnds(problema, 10, GLPK.GLP_UP, 0, 0);//CRIANÇA
-                //GLPK.intArray_setitem(indices, 1, 1);
-                //GLPK.intArray_setitem(indices, 2, 2);
-                //GLPK.doubleArray_setitem(valores, 1, 1);
-                //GLPK.doubleArray_setitem(valores, 2, -1);
-                //GLPK.glp_set_mat_row(problema, 10, 2, indices, valores);
-
-                //GLPK.glp_set_row_name(problema, 11, "R11");
-                //GLPK.glp_set_row_bnds(problema, 11, GLPK.GLP_UP, 4, 4);//CRIANÇA
-                //GLPK.intArray_setitem(indices, 2, 2);
-                //GLPK.doubleArray_setitem(valores, 2, 1);
-                //GLPK.glp_set_mat_row(problema, 11, 2, indices, valores);
-
 
                 // liberar memória
                 GLPK.delete_intArray(indices);
@@ -167,14 +158,21 @@ namespace OtimizaçãoSimplex.Controllers
                 GLPK.glp_init_smcp(parametro);
                 int ret = GLPK.glp_simplex(problema, parametro);
 
+               
+                //Gerar arquivo de analise de sensibilidade.
+                GLPK.glp_print_ranges(problema, 0, indices, 0, "Análise_de_Sensibilidade.txt");
+
                 //Restaurar solução
                 if (ret == 0)
                 {
+                    //Printar solução primal e dual.
                     retorno.mensagem = "Solução Ótima encontrada!";
                     retorno.status = true;
 
-                    string reto = "";
+                    string retoPrimal = "";
+                    string retoDual = "";
                     String name;
+                    // valor total Z função objetivo forma tratada
                     if (GLPK.glp_get_obj_val(problema).ToString().Length > 1 && GLPK.glp_get_obj_val(problema).ToString().Contains(','))
                         retorno.valorTotal = GLPK.glp_get_obj_val(problema).ToString().Substring(0, GLPK.glp_get_obj_val(problema).ToString().IndexOf(","));
                     else
@@ -184,18 +182,31 @@ namespace OtimizaçãoSimplex.Controllers
                         name = GLPK.glp_get_col_name(problema, i);
 
                         if (GLPK.glp_get_col_prim(problema, i).ToString().Length > 1 && GLPK.glp_get_col_prim(problema, i).ToString().Contains('.'))
-                            reto = GLPK.glp_get_col_prim(problema, i).ToString().Substring(0, GLPK.glp_get_col_prim(problema, i).ToString().IndexOf("."));
+                        {//pegando valor de retorno para ou criança adultos primal e dual de forma tratada
+                            retoPrimal = GLPK.glp_get_col_prim(problema, i).ToString().Substring(0, GLPK.glp_get_col_prim(problema, i).ToString().IndexOf("."));
+                            retoDual = GLPK.glp_get_col_dual(problema, i).ToString();
+                        }
                         else
-                            reto = GLPK.glp_get_col_prim(problema, i).ToString();
-
+                        {//pegando valor de retorno para ou criança adultos primal e dual
+                            retoPrimal = GLPK.glp_get_col_prim(problema, i).ToString();
+                            retoDual = GLPK.glp_get_col_dual(problema, i).ToString();
+                        }
                         if (name == "A")
-                            retorno.valorAdulto = reto;
+                        {// retorno para adultos
+                            retorno.valorAdultoP = retoPrimal;
+                            retorno.valorAdultoD = retoDual;
+                        }
                         else if (name == "C")
-                            retorno.valorCrianca = reto;
+                        {// retorno para crianças 
+                            retorno.valorCriancaP = retoPrimal;
+                            retorno.valorCriancaD = retoDual;
+                        }
                     }
+
                     //Liberar memória
                     GLPK.glp_delete_prob(problema);
-                    return  Json(new { retorno });
+                    //retorno para front
+                    return Json(new { retorno });
                 }
                 else
                 {
@@ -203,6 +214,7 @@ namespace OtimizaçãoSimplex.Controllers
                     GLPK.glp_delete_prob(problema);
                     retorno.mensagem = "Não é possível resolver o problema!";
                     retorno.status = false;
+                    //retorno para front
                     return Json(new { retorno });
                 }
 
@@ -212,9 +224,19 @@ namespace OtimizaçãoSimplex.Controllers
             {
                 retorno.mensagem = "Exeção não esperada!";
                 retorno.status = false;
+                //retorno para front
                 return Json(new { retorno });
 
             }
+        }
+
+        [Route]
+        public void BaixarTXT()
+        {
+            Response.ContentType = "Application/txt";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=Análise_de_Sensibilidade.txt");
+            Response.TransmitFile(Server.MapPath("~/Análise_de_Sensibilidade.txt"));
+            Response.End();
         }
     }
 }
