@@ -1,0 +1,47 @@
+GLPK 4.65 - SENSITIVITY ANALYSIS REPORT                                                                         Page   1
+
+Problem: Otimizacao    
+Objective:  Z = 79.28571429 (MAXimum)
+
+   No. Row name     St      Activity         Slack   Lower bound       Activity      Obj coef  Obj value at Limiting
+                                          Marginal   Upper bound          range         range   break point variable
+------ ------------ -- ------------- ------------- -------------  ------------- ------------- ------------- ------------
+     1 R1           BS     127.07143    1023.92857          -Inf       56.42857       -.34783      35.08696 R7
+                                            .         1151.00000      127.07143          +Inf          +Inf
+
+     2 R2           BS      27.04286     426.95714          -Inf        6.15714      -1.17647      47.47059 R7
+                                            .          454.00000       30.64286       5.00000     214.50000 R6
+
+     3 R3           BS     333.42857     524.57143          -Inf      167.57143       -.14815      29.88889 R7
+                                            .          858.00000      333.42857          +Inf          +Inf
+
+     4 R4           BS      63.53571     639.46429          -Inf       28.21429       -.69565      35.08696 R7
+                                            .          703.00000       63.53571          +Inf          +Inf
+
+     5 R5           BS      63.53571     518.46429          -Inf       28.21429       -.69565      35.08696 R7
+                                            .          582.00000       63.53571          +Inf          +Inf
+
+     6 R6           NU     807.00000        .               -Inf      429.00000       -.04762      61.28571 C
+                                            .04762     807.00000     1065.00000          +Inf      91.57143 C
+
+     7 R7           NU     429.00000        .               -Inf      171.00000       -.09524      54.71429 C
+                                            .09524     429.00000      799.80000          +Inf     114.60000 A
+
+     8 R8           BS     174.85714     176.14286          -Inf       58.14286       -.21053      42.47368 R7
+                                            .          351.00000      183.85714       2.00000     429.00000 R6
+
+GLPK 4.65 - SENSITIVITY ANALYSIS REPORT                                                                         Page   2
+
+Problem: Otimizacao  
+Objective:  Z = 79.28571429 (MAXimum)
+
+   No. Column name  St      Activity      Obj coef   Lower bound       Activity      Obj coef  Obj value at Limiting
+                                          Marginal   Upper bound          range         range   break point variable
+------ ------------ -- ------------- ------------- -------------  ------------- ------------- ------------- ------------
+     1 A            BS      47.78571       1.00000        .             1.71429        .46667      53.80000 R7
+                                            .          114.00000       61.28571       2.33333     143.00000 R6
+
+     2 C            BS      31.50000       1.00000        .          -123.00000        .42857      61.28571 R6
+                                            .           53.00000       53.80000       2.14286     115.28571 R7
+
+End of report

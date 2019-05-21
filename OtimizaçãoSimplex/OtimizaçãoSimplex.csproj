@@ -175,6 +175,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Análise_de_sensibilidade.txt" />
+    <Content Include="fonts\Análise_de_sensibilidade.txt" />
     <Content Include="favicon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

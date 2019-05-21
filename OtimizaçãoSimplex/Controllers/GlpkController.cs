@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -233,10 +237,10 @@ namespace OtimizaçãoSimplex.Controllers
         [Route]
         public void BaixarTXT()
         {
-            Response.ContentType = "Application/txt";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=Análise_de_Sensibilidade.txt");
-            Response.TransmitFile(Server.MapPath("~/Análise_de_Sensibilidade.txt"));
-            Response.End();
+            //string document = Server.MapPath("~/fonts/Análise de sensibilidade.txt");
+            //string type = "application/txt";
+            //return File(document, type, "Análise de sensibilidade.txt");
+
         }
     }
 }

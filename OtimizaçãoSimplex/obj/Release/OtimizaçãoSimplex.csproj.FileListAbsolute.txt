@@ -212,3 +212,4 @@ D:\Users\I$ync\source\repos\Otimizacao-Simplex-GLPK\OtimizaçãoSimplex\obj\Rele
 D:\Users\I$ync\source\repos\Otimizacao-Simplex-GLPK\OtimizaçãoSimplex\obj\Release\OtimizaçãoSimplex.csproj.CopyComplete
 D:\Users\I$ync\source\repos\Otimizacao-Simplex-GLPK\OtimizaçãoSimplex\obj\Release\OtimizaçãoSimplex.dll
 D:\Users\I$ync\source\repos\Otimizacao-Simplex-GLPK\OtimizaçãoSimplex\obj\Release\OtimizaçãoSimplex.pdb
+D:\Users\I$ync\source\repos\Otimizacao-Simplex-GLPK\OtimizaçãoSimplex\obj\Release\OtimizaçãoSimplex.csprojAssemblyReference.cache
